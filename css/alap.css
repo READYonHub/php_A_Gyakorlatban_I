@@ -1,0 +1,98 @@
+/** {
+
+    border: dotted 1px #ccc;
+}
+*/
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ccc;
+}
+
+#befoglalo {
+    width: 960px;
+    margin: 20px auto;
+    border: solid 10px #fff;
+    background-color: #f1f1f1;
+}
+
+#fejlec {
+    text-align: center;
+    background-color: #c00;
+    border-bottom: solid 10px #fff;
+}
+
+#fejlce h1 {
+    margin: 0;
+    padding: 20px;
+}
+
+#menu {
+    width: 200px;
+    float: left;
+    text-transform: uppercase;
+}
+
+#menu ul {
+    padding: 0;
+}
+
+#menu li {
+    display: block;
+    margin-bottom: 2px;
+    list-style-type: none;
+}
+
+#menu a {
+    color: #000;
+    display: block;
+    padding: 5px 15px;
+    text-decoration: none;
+    background-color: #c00;
+}
+
+#menu a:hover {
+    color: #fff;
+    background-color: #000;
+    text-decoration: underline;
+}
+
+#menu a.aktiv{
+    color: #fff;
+    background-color: #000;
+}
+#tartalom {
+    margin: 20px 220px;
+    min-height: 400px;
+}
+
+#tartalom h2 {
+    margin-top: 0;
+    font-size: 18px;
+    border-bottom: solid 1px #f00;
+}
+
+#tartalom p {
+    text-align: justify;
+}
+
+#oldalsav {
+    float: right;
+    width: 200px;
+    margin-top: 20px;
+}
+
+#oldalsav h3 {
+    margin-top: 0;
+
+    border-bottom: solid 1px #f00;
+}
+
+#lablec {
+    clear: both;
+    text-align: center;
+    background-color: #090;
+    color: #fff;
+    padding: 10px;
+}

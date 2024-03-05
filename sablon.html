@@ -4,34 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MYCMS - Bemutatkozás</title>
+    <title>MYCMS - {{menunev}}</title>
+    <meta name="description" content="{{leiras}}">
+    <meta name="keywords" content="{{kulcsszavak}}">
+    <meta name="author" content="Név, telefonszám, e-mail">
+    <link rel="stylesheet" href="css/alap.css">
+    <link type="image/x-icon" rel="shortcut icon" href="index/favicon.png">
 </head>
 
 <body>
-    <div id="befgolalo">
-        <div id="fejlec">
+    <div id="befoglalo">
+        <header id="fejlec">
             <h1>Fejléc</h1>
-        </div>
-        <div id="menu">
-            <ul>
-                <li><a href="">Bemutatkozás</a></li>
-                <li><a href="">Kedvencek</a></li>
-                <li><a href="">Képgaléria</a></li>
-                <li><a href="">Kapcsolat</a></li>
-            </ul>
-        </div>
-        <div id="tartalom">
-            <h2>Bemutatkozás</h2>
-            <p></p>
-            <p></p>
-            <p></p>
-        </div>
-        <div id="oldalsav">
-            <p></p>
-        </div>
-        <div id="lablec">
+        </header>
+        <nav id="menu">
+            {{menu}}
+        </nav>
+        <aside id="oldalsav">
+            {{oldalsav}}
+        </aside>
+        <main id="tartalom">
+            <h2>{{menunev}}</h2>
+            {{tartalom}}
+        </main>
+        <footer id="lablec">
             <small>MyCMS - Bemutatkozás</small>
-        </div>
+        </footer>
     </div>
 </body>
 
