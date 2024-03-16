@@ -3,29 +3,36 @@ require_once("adatbazis.php");
 
 /* Menu osszeallitasa */
 
-$sql            =  "SELECT id, allias, menunev, 
+$sql            =  "SELECT id, allias, menunev
                     FROM cms_tartalom
                     WHERE statusz = 1
                     ORDER BY sorrend ASC";
 
-$menu           =   "<ul>
-                        <li><a href=\"#\" class=\"aktiv\">Bemutatkozás</a></li>
-                        <li><a href=\"#\">Kedvencek</a></li>
-                        <li><a href=\"#\">Képgaléria</a></li>
-                        <li><a href=\"#\">Kapcsolat</a></li>
-                    </ul>";
+$eredmenyek     =   mysqli_query($dbconn, $sql);
 
+$menu           =   "<ul>\n";
+/* ameddig kepes vagyok sorokat kesziteni addig vegrefoghajtodni  */
+while ($sor     = mysqli_fetch_assoc($eredmenyek)) {
+    $menu      .=   "<li><a href=\"index.php?id={$sor['id']}\">{$sor['menunev']}</a></li>\n";
+}
+$menu          .=   "</ul>\n";
 /* Tartalom elkeszitese */
 
+/* az (int) egy tipus kenyszerites ami jol hasznalhato vedekezeskepp az sql injection ellen */
+$id             =  (isset($_GET['id'])) ? (int)$_GET['id'] : 1;
+/*print*/
 $sql            =  "SELECT menunev, tartalom, modositas, leiras, kulcsszavak
                     FROM cms_tartalom
-                    WHERE id = " . $id . "
+                    WHERE id = {$id} 
                     LIMIT 1";
 
-$leiras         =   $sor['leiras'];
+$eredmeny       =   mysqli_query($dbconn, $sql);
+$sor            =   mysqli_fetch_assoc($eredmeny); // Ezután kellene inicializálni a $sor változót
+$leiras         =   $sor['leiras']; // A $sor változó csak ezen a ponton lesz értelmezhető
 $kulcsszavak    =   $sor['kulcsszavak'];
 $menunev        =   $sor['menunev'];
 $tartalom       =   $sor['tartalom'];
+
 
 /* Modulok kezelese */
 $oldalsav       =   "";
