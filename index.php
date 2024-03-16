@@ -27,12 +27,22 @@ $sql            =  "SELECT menunev, tartalom, modositas, leiras, kulcsszavak
                     LIMIT 1";
 
 $eredmeny       =   mysqli_query($dbconn, $sql);
-$sor            =   mysqli_fetch_assoc($eredmeny); // Ezután kellene inicializálni a $sor változót
-$leiras         =   $sor['leiras']; // A $sor változó csak ezen a ponton lesz értelmezhető
-$kulcsszavak    =   $sor['kulcsszavak'];
-$menunev        =   $sor['menunev'];
-$tartalom       =   $sor['tartalom'];
 
+/*elkell dontenem, hogy van tartalmam vagy nincs tartalmam, ez lesz az ervenyes tartalom*/
+if (mysqli_num_rows($eredmeny) == 1) {
+    $sor            =   mysqli_fetch_assoc($eredmeny); // Ezután kellene inicializálni a $sor változót
+    $leiras         =   $sor['leiras']; // A $sor változó csak ezen a ponton lesz értelmezhető
+    $kulcsszavak    =   $sor['kulcsszavak'];
+    $menunev        =   $sor['menunev'];
+    $tartalom       =   $sor['tartalom'];
+}
+/* Az oldal nem talalhato, ha hulyeseget irnak be */
+else{
+    $leiras         =   ""; 
+    $kulcsszavak    =   ""; 
+    $menunev        =   "Hiba"; 
+    $tartalom       =   "<p><em>A keresett oldal nem talalhato...</em></p>"; 
+}  
 
 /* Modulok kezelese */
 $oldalsav       =   "";
