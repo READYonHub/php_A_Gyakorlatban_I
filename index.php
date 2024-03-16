@@ -21,7 +21,7 @@ $menu          .=   "</ul>\n";
 /* az (int) egy tipus kenyszerites ami jol hasznalhato vedekezeskepp az sql injection ellen */
 $id             =  (isset($_GET['id'])) ? (int)$_GET['id'] : 1;
 /*print*/
-$sql            =  "SELECT menunev, tartalom, modositas, leiras, kulcsszavak
+$sql            =  "SELECT menunev, tartalom, letrehozas, modositas, leiras, kulcsszavak
                     FROM cms_tartalom
                     WHERE id = {$id} 
                     LIMIT 1";
@@ -35,6 +35,7 @@ if (mysqli_num_rows($eredmeny) == 1) {
     $kulcsszavak    =   $sor['kulcsszavak'];
     $menunev        =   $sor['menunev'];
     $tartalom       =   $sor['tartalom'];
+    $letrehozas     =   $sor['letrehozas'];
 }
 /* Az oldal nem talalhato, ha hulyeseget irnak be */
 else{
@@ -42,6 +43,7 @@ else{
     $kulcsszavak    =   ""; 
     $menunev        =   "Hiba"; 
     $tartalom       =   "<p><em>A keresett oldal nem talalhato...</em></p>"; 
+    $letrehozas     =   date("Y-m-d H:i:s");
 }  
 
 /* Modulok kezelese */
@@ -49,10 +51,11 @@ $oldalsav       =   "";
 
 /* Sablonozo */
 $sablon = file_get_contents("sablon.html"); //print file_get_contents gyakorlatilag csak átjátszóként beszippant egy fájlt
+$sablon = str_replace("{{menu}}",           $menu,          $sablon);
+$sablon = str_replace("{{menunev}}",        $menunev,       $sablon);
+$sablon = str_replace("{{tartalom}}",       $tartalom,      $sablon);
+$sablon = str_replace("{{letrehozas}}",     $letrehozas,     $sablon);
 $sablon = str_replace("{{leiras}}",         $leiras,        $sablon);
 $sablon = str_replace("{{kulcsszavak}}",    $kulcsszavak,   $sablon);
-$sablon = str_replace("{{menunev}}",        $menunev,       $sablon);
-$sablon = str_replace("{{menu}}",           $menu,          $sablon);
-$sablon = str_replace("{{tartalom}}",       $tartalom,      $sablon);
 $sablon = str_replace("{{oldalsav}}",       $oldalsav,      $sablon);
 print $sablon;
