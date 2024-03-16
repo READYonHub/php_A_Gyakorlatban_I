@@ -12,3 +12,8 @@ tartalomkezelo lesz a neve ennek a gyakorlatnak
 specifikaciokban hatarozzuk meg mit fogunk csinalni
 
 sablon.html
+html alap weboldal, hogy hogyan nezzen ki 
+
+adatbazis
+php_a_gyakorlatban.db   utf8mb4_general_ci
+minden kezdodleges beallitast orokolnek a tablak
