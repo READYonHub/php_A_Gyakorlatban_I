@@ -17,3 +17,25 @@ html alap weboldal, hogy hogyan nezzen ki
 adatbazis
 php_a_gyakorlatban.db   utf8mb4_general_ci
 minden kezdodleges beallitast orokolnek a tablak
+
+htaccess - ez gyakorlatilag egy olyan fajl aminek nincs neve csak kiterjesztese es ide lehet megadni a kulonbozo reguralis kifejezeseket
+<!--
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c> /* ha nincs bekapcsolva az apache moduleban a rewrie_module, akkor egy fatal error kap, es ezzel kilehet kuszolbulni */
+
+RewriteEngine On /* beallithatjuk a url cim attirast */
+RewriteBase / /* ha tobb konyvtari szintre leteszem akkor meglehet adni kezdeti alapkonyvtar elereset */
+
+RewriteRule ^index\.php$ - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+</IfModule>
+
+# END WordPress
+
+https://htaccess.petertoth.hu/htaccess-cms-rendszerben/
+-->

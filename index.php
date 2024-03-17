@@ -1,5 +1,6 @@
 <?php
 require_once("adatbazis.php");
+print_r($_GET);
 
 /* Menu osszeallitasa */
 
@@ -13,17 +14,18 @@ $eredmenyek     =   mysqli_query($dbconn, $sql);
 $menu           =   "<ul>\n";
 /* ameddig kepes vagyok sorokat kesziteni addig vegrefoghajtodni  */
 while ($sor     = mysqli_fetch_assoc($eredmenyek)) {
-    $menu      .=   "<li><a href=\"index.php?id={$sor['id']}\">{$sor['menunev']}</a></li>\n";
+    $menu      .= "<li><a href=\"./?allias={$sor['allias']}\">{$sor['menunev']}</a></li>\n";
 }
 $menu          .=   "</ul>\n";
+
 /* Tartalom elkeszitese */
 
 /* az (int) egy tipus kenyszerites ami jol hasznalhato vedekezeskepp az sql injection ellen */
-$id             =  (isset($_GET['id'])) ? (int)$_GET['id'] : 1;
+$allias         =  isset($_GET['allias']) ? $_GET['allias'] : 'bemutatkozas';
 /*print*/
-$sql            =  "SELECT menunev, tartalom, letrehozas, modositas, leiras, kulcsszavak
+print $sql            =  "SELECT menunev, tartalom, letrehozas, modositas, leiras, kulcsszavak
                     FROM cms_tartalom
-                    WHERE id = {$id} 
+                    WHERE allias = \"{$allias}\"
                     LIMIT 1";
 
 $eredmeny       =   mysqli_query($dbconn, $sql);
