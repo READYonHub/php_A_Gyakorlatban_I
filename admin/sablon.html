@@ -18,7 +18,9 @@
     <script>
         $(document).ready(
             function () {
-                $('textarea').redactor();
+                $('textarea#tartalom').redactor({
+                    minHeight: 300
+                });
             }
         );
     </script>

@@ -109,6 +109,11 @@ form #tartalom {
     margin: 0;
 }
 
+textarea {
+    width: 515px;
+    min-height: 100px;
+}
+
 #oldalsav {
     float: right;
     width: 200px;

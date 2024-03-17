@@ -1,13 +1,17 @@
 <?php
+if (!isset($_REQUEST['id'])) {
+    header("Location: szerkesztes.php"); //ures urlappal ne lehessen bekeruni a rendszerbe
+}
+require_once("../adatbazis.php");
 
 /* ha megnyomtak az oke gombot */
 
 if (isset($_POST['rendben'])) {
 
     //Valtozok tisztitasa
-
     $_POST          =       array_map("trim",   $_POST);
 
+    $id             =      (int)$_POST['id'];
     $allias         =      strtolower(strip_tags($_POST['allias']));
     $sorrend        =      (int)$_POST['sorrend'];
     $menunev        =      strip_tags($_POST['menunev']);
@@ -35,16 +39,31 @@ if (isset($_POST['rendben'])) {
     }
     // beszuras az adatbazisba
     else {
-        require_once("../adatbazis.php");
-        $sql    =   "INSERT INTO cms_tartalom 
-                     (allias, sorrend, menunev, tartalom, letrehozas, leiras, kulcsszavak, statusz)
-                     VALUES
-                     ('{$allias}',{$sorrend} , '{$menunev}', '{$tartalom}',
-                      NOW(), '{$leiras}', '{$kulcsszavak}', '{$statusz}')";
+        $sql    =   "UPDATE cms_tartalom
+                    SET     allias  =   '{$allias}', sorrend = '{$sorrend}', menunev  =   '{$menunev}', tartalom    =   '{$tartalom}',
+                            modositas   =    NOW() , leiras  =   '{$leiras}',kulcsszavak    =       '{$kulcsszavak}',
+                            statusz =   '{$statusz}'
+                    WHERE id    =   {$id}
+                    LIMIT 1";
 
         $eredmeny   =   mysqli_query($dbconn, $sql);
 
         header("Location: szerkesztes.php");
+    }
+} else {
+    $id             =   (int)$_GET['id'];
+    $sql            =  "SELECT id, allias, sorrend, menunev, tartalom, 
+                               leiras, kulcsszavak, statusz
+                        FROM cms_tartalom
+                        WHERE id = {$id}
+                        LIMIT 1";
+
+    $eredmeny       =   mysqli_query($dbconn, $sql);
+
+    $sor            =   mysqli_fetch_assoc($eredmeny);
+
+    foreach ($sor as $kulcs => $ertek) {
+        $$kulcs     =   $ertek;
     }
 }
 
@@ -56,12 +75,18 @@ $urlap  =   <<<URLAP
 <form method="post" action="">
 
     {$kimenet}
+    <!--Allias input-->
+    <p>
+        <br>
+        <input type="hidden" id="id" name="id" value="{$id}">
+        <br>
+    </p>
 
     <!--Allias input-->
     <p>
         <label for="allias">Allias:*</label>
         <br>
-        <input type="text" id="allias" name="allias" required pattern="^[a-z-_]+$">
+        <input type="text" id="allias" name="allias" required pattern="^[a-z-_]+$" value="{$allias}">
         <br>
     </p>
 
@@ -69,7 +94,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="sorrend">Sorrend:</label>
         <br>
-        <input type="number" id="sorrend" name="sorrend" min="1">
+        <input type="number" id="sorrend" name="sorrend" min="1" value="{$sorrend}">
         <br>
     </p>
 
@@ -77,7 +102,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="menunev">Menunev:</label>
         <br>
-        <input type="text" id="menunev" name="menunev" required>
+        <input type="text" id="menunev" name="menunev" required value="{$menunev}">
         <br>
     </p>
 
@@ -85,7 +110,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="tartalom">Tartalom:</label>
         <br>
-        <textarea id="tartalom" name="tartalom" rows="20"></textarea>
+        <textarea id="tartalom" name="tartalom" rows="20">{$tartalom}</textarea>
         <br>
     </p>
 
@@ -93,7 +118,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="leiras">Leiras:</label>
         <br>
-        <textarea id="leiras" name="leiras"></textarea>
+        <textarea id="leiras" name="leiras">{$leiras}</textarea>
         <br>
     </p>
 
@@ -101,7 +126,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="kulcsszavak">Leiras:</label>
         <br>
-        <textarea id="kulcsszavak" name="kulcsszavak"></textarea>
+        <textarea id="kulcsszavak" name="kulcsszavak">{$kulcsszavak}</textarea>
         <br>
     </p>
 

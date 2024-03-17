@@ -1,0 +1,7 @@
+.hraccess 404-es hiba kezeles
+
+admin letrehozas admin emlekezet
+
+admin letrehozas kepfeltoltes (redactor)
+
+torles eseten prompt ablak megerosites

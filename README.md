@@ -51,3 +51,5 @@ https://htaccess.petertoth.hu/htaccess-cms-rendszerben/
 * WYSIWYG - what you see is what you get
 * minimalis admin felulet
 
+bemenet ellenorzesere
+https://www.html5pattern.com/
