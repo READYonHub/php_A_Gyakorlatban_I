@@ -1,13 +1,31 @@
-/** {
-
-    border: dotted 1px #ccc;
-}
-*/
-
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial;
     background-color: #ccc;
+}
+
+table {
+    font-size: 12px;
+    border: solid 2px #000;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 5px;
+    border: solid 1px #000;
+}
+
+tr:nth-child(2n) {
+    background-color: #ddd;
+}
+
+tr:nth-child(2n+1) {
+    background-color: #fff;
+}
+
+th {
+    background-color: #f00;
 }
 
 #befoglalo {
@@ -58,10 +76,11 @@ body {
     text-decoration: underline;
 }
 
-#menu a.aktiv{
+#menu a.aktiv {
     color: #fff;
     background-color: #000;
 }
+
 #tartalom {
     margin: 20px 220px;
     min-height: 400px;
@@ -75,6 +94,15 @@ body {
 
 #tartalom p {
     text-align: justify;
+}
+
+#tartalom a {
+    color: #333;
+    text-decoration: none;
+}
+
+#tartalom a:hover {
+    color: #F00;
 }
 
 #oldalsav {

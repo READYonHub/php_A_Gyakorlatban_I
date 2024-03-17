@@ -1,4 +1,4 @@
-# php_A_Gyakorlatban_I
+# php_A_Gyakorlatban_I - III
 
 ## PHP a gyakor_01_Specifikáció, Front End elkészítése 1
 
@@ -39,3 +39,15 @@ RewriteRule . /index.php [L]
 
 https://htaccess.petertoth.hu/htaccess-cms-rendszerben/
 -->
+
+* kesz egy frontend oldal ahol elkeszult egy statikus html, css oldal 
+* tervezve lett egy adatbazis, minta adatokkal
+* keszult 4 aloldal
+* minimalis url cimek hangolasa
+
+# PHP a gyakor_04_Back End funkciók létrehozása 1
+
+* crud oldallakkal es listazas
+* WYSIWYG - what you see is what you get
+* minimalis admin felulet
+
