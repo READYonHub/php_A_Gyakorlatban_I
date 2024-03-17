@@ -5,3 +5,5 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^([a-zA-Z0-9-]+)$ index.php?allias=$1
 </IfModule>
+
+ErrorDocument 404 /bemutatkozas 
