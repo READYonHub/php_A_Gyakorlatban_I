@@ -105,6 +105,10 @@ th {
     color: #F00;
 }
 
+form #tartalom {
+    margin: 0;
+}
+
 #oldalsav {
     float: right;
     width: 200px;
