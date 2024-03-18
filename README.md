@@ -53,3 +53,7 @@ https://htaccess.petertoth.hu/htaccess-cms-rendszerben/
 
 bemenet ellenorzesere
 https://www.html5pattern.com/
+
+# PHP a gyakor_06_Autentikáció, biztonság 1
+* authentikáció
+* biztonsági rések
