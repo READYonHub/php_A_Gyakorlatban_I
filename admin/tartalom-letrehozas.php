@@ -131,7 +131,7 @@ $urlap  =   <<<URLAP
         <br>
         <input type="reset" value="Megse">
     </p>
-</form>
+ </form>
 URLAP;
 
 $menu   =   "<ul>

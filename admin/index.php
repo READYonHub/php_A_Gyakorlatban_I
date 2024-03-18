@@ -2,6 +2,7 @@
 session_start();
 
 $kimenet    =   "";
+$id         =   "";
 /* Űrlap feldolgozása */
 if (isset($_POST['belepes'])) {
 
@@ -44,8 +45,6 @@ if (isset($_POST['belepes'])) {
 
         if (mysqli_num_rows($eredmeny) == 1) {
             $_SESSION['belepett']   = true;
-            $id         =   $sor['id'];
-
 
             $log    =   date("Y-m-d H:i:s") . " Sikeres belépés a(z) {$email} címről ({$_SERVER['REMOTE_ADDR']})\n";
             file_put_contents("log.txt", $log, FILE_APPEND);
