@@ -29,7 +29,7 @@ while ($sor = mysqli_fetch_assoc($eredmeny)) {
                     <td>" . substr(strip_tags($sor['tartalom']), 0, 100) . "</td> 
                     <td>{$sor['statusz']}</td>
                     <td><a href=\"modositas.php?id={$sor['id']}\"><span class=\"material-symbols-outlined\">edit</span></a>
-                    <a href=\"torles.php?id={$sor['id']}\"><span class=\"material-symbols-outlined\">delete</span></a></td>       
+                    <a href=\"torles.php?id={$sor['id']}\"><span class=\"material-symbols-outlined\" onclick=\"return confirm('Biztos benne?')\">delete</span></a></td>       
                 </tr>\n";
 }
 

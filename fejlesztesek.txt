@@ -1,6 +1,6 @@
-.hraccess 404-es hiba kezeles
+kész    -   .hraccess 404-es hiba kezeles
 
-admin letrehozas admin emlekezet
+kész    -   admin letrehozas admin emlekezet
 
 admin letrehozas kepfeltoltes (redactor)
 

@@ -49,6 +49,13 @@ if (isset($_POST['rendben'])) {
 }
 
 $kimenet    =   isset($kimenet) ?   $kimenet    :   "";
+$allias         =      (isset($allias))         ?    $allias        :   "";
+$sorrend        =      (isset($sorrend))        ?    $sorren        :   "";
+$menunev        =      (isset($menunev))        ?    $menunev       :   "";
+$tartalom       =      (isset($tartalom))       ?   $tartalom       :   "";
+$leiras         =      (isset($leiras))         ?   $leiras         :   "";
+$kulcsszavak    =      (isset($kulcsszavak))    ?   $kulcsszavak    :   "";
+$statusz        =      (isset($statusz))        ?   $statusz        :   "";
 
 /*  heredoc in PHP */
 $urlap  =   <<<URLAP
@@ -61,7 +68,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="allias">Allias:*</label>
         <br>
-        <input type="text" id="allias" name="allias" required pattern="^[a-z-_]+$">
+        <input type="text" id="allias" name="allias" required pattern="^[a-z-_]+$" value="{$allias}">
         <br>
     </p>
 
@@ -69,7 +76,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="sorrend">Sorrend:</label>
         <br>
-        <input type="number" id="sorrend" name="sorrend" min="1">
+        <input type="number" id="sorrend" name="sorrend" min="1" value="{$sorrend}">
         <br>
     </p>
 
@@ -77,7 +84,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="menunev">Menunev:</label>
         <br>
-        <input type="text" id="menunev" name="menunev" required>
+        <input type="text" id="menunev" name="menunev" required value="{$menunev}">
         <br>
     </p>
 
@@ -85,7 +92,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="tartalom">Tartalom:</label>
         <br>
-        <textarea id="tartalom" name="tartalom" rows="20"></textarea>
+        <textarea id="tartalom" name="tartalom" rows="20">{$tartalom}</textarea>
         <br>
     </p>
 
@@ -93,7 +100,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="leiras">Leiras:</label>
         <br>
-        <textarea id="leiras" name="leiras"></textarea>
+        <textarea id="leiras" name="leiras">{$leiras}</textarea>
         <br>
     </p>
 
@@ -101,7 +108,7 @@ $urlap  =   <<<URLAP
     <p>
         <label for="kulcsszavak">Leiras:</label>
         <br>
-        <textarea id="kulcsszavak" name="kulcsszavak"></textarea>
+        <textarea id="kulcsszavak" name="kulcsszavak">{$kulcsszavak}</textarea>
         <br>
     </p>
 
