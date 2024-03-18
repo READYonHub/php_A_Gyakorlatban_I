@@ -1,17 +1,19 @@
 <?php
-if (!isset($_REQUEST['id'])) {
-    header("Location: szerkesztes.php"); //ures urlappal ne lehessen bekeruni a rendszerbe
+
+/* Lapvédelem */
+session_start();
+if (!isset($_SESSION['belepett'])) {
+    header("Location: index.php");
 }
-require_once("../adatbazis.php");
 
 /* ha megnyomtak az oke gombot */
 
 if (isset($_POST['rendben'])) {
 
     //Valtozok tisztitasa
+
     $_POST          =       array_map("trim",   $_POST);
 
-    $id             =      (int)$_POST['id'];
     $allias         =      strtolower(strip_tags($_POST['allias']));
     $sorrend        =      (int)$_POST['sorrend'];
     $menunev        =      strip_tags($_POST['menunev']);
@@ -39,35 +41,27 @@ if (isset($_POST['rendben'])) {
     }
     // beszuras az adatbazisba
     else {
-        $sql    =   "UPDATE cms_tartalom
-                    SET     allias  =   '{$allias}', sorrend = '{$sorrend}', menunev  =   '{$menunev}', tartalom    =   '{$tartalom}',
-                            modositas   =    NOW() , leiras  =   '{$leiras}',kulcsszavak    =       '{$kulcsszavak}',
-                            statusz =   '{$statusz}'
-                    WHERE id    =   {$id}
-                    LIMIT 1";
+        require_once("../adatbazis.php");
+        $sql    =   "INSERT INTO cms_tartalom 
+                     (allias, sorrend, menunev, tartalom, letrehozas, leiras, kulcsszavak, statusz)
+                     VALUES
+                     ('{$allias}',{$sorrend} , '{$menunev}', '{$tartalom}',
+                      NOW(), '{$leiras}', '{$kulcsszavak}', '{$statusz}')";
 
         $eredmeny   =   mysqli_query($dbconn, $sql);
 
         header("Location: szerkesztes.php");
     }
-} else {
-    $id             =   (int)$_GET['id'];
-    $sql            =  "SELECT id, allias, sorrend, menunev, tartalom, 
-                               leiras, kulcsszavak, statusz
-                        FROM cms_tartalom
-                        WHERE id = {$id}
-                        LIMIT 1";
-
-    $eredmeny       =   mysqli_query($dbconn, $sql);
-
-    $sor            =   mysqli_fetch_assoc($eredmeny);
-
-    foreach ($sor as $kulcs => $ertek) {
-        $$kulcs     =   $ertek;
-    }
 }
 
 $kimenet    =   isset($kimenet) ?   $kimenet    :   "";
+$allias         =      (isset($allias))         ?    $allias        :   "";
+$sorrend        =      (isset($sorrend))        ?    $sorren        :   "";
+$menunev        =      (isset($menunev))        ?    $menunev       :   "";
+$tartalom       =      (isset($tartalom))       ?   $tartalom       :   "";
+$leiras         =      (isset($leiras))         ?   $leiras         :   "";
+$kulcsszavak    =      (isset($kulcsszavak))    ?   $kulcsszavak    :   "";
+$statusz        =      (isset($statusz))        ?   $statusz        :   "";
 
 /*  heredoc in PHP */
 $urlap  =   <<<URLAP
@@ -75,12 +69,6 @@ $urlap  =   <<<URLAP
 <form method="post" action="">
 
     {$kimenet}
-    <!--Allias input-->
-    <p>
-        <br>
-        <input type="hidden" id="id" name="id" value="{$id}">
-        <br>
-    </p>
 
     <!--Allias input-->
     <p>
@@ -143,13 +131,17 @@ $urlap  =   <<<URLAP
         <br>
         <input type="reset" value="Megse">
     </p>
-    <p><a href="szerkesztes.php">Vissza a tablazathoz</a></p>
 </form>
 URLAP;
 
+$menu   =   "<ul>
+                <li><a href=\"tartalom-szerkesztes.php\">Vissza</a></li>
+                <li></li>
+            </ul>";
+
 /* Sablonozo */
 $sablon = file_get_contents("sablon.html"); //print file_get_contents gyakorlatilag csak átjátszóként beszippant egy fájlt
-$sablon = str_replace("{{menu}}",           "",                         $sablon);
+$sablon = str_replace("{{menu}}",           $menu,                         $sablon);
 $sablon = str_replace("{{menunev}}",        "Uj oldal letrehozasa",     $sablon);
 $sablon = str_replace("{{tartalom}}",       $urlap,                     $sablon);
 $sablon = str_replace("{{oldalsav}}",       "",                         $sablon);

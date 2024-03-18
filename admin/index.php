@@ -44,8 +44,17 @@ if (isset($_POST['belepes'])) {
 
         if (mysqli_num_rows($eredmeny) == 1) {
             $_SESSION['belepett']   = true;
-            header("Location: szerkesztes.php");
+            $id         =   $sor['id'];
+
+
+            $log    =   date("Y-m-d H:i:s") . " Sikeres belépés a(z) {$email} címről ({$_SERVER['REMOTE_ADDR']})\n";
+            file_put_contents("log.txt", $log, FILE_APPEND);
+
+            header("Location: tartalom-szerkesztes.php");
         } else {
+            $log        =   date("Y-m-d H:i:s") . " Sikertelen belépés a(z) {$email} címről ({$_SERVER['REMOTE_ADDR']})\n";
+            file_put_contents("log.txt", $log, FILE_APPEND);
+
             $kimenet    =   "<p><em>Rossz e-mail címet vagy jelszót adtál meg!</em></p>\n";
         }
     }

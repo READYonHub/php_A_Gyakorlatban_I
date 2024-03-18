@@ -1,5 +1,11 @@
 <?php
 
+/* Lapvédelem */
+session_start();
+if (!isset($_SESSION['belepett'])) {
+    header("Location: index.php");
+}
+
 if (isset($_GET['id'])) {
     $id =   (int)$_GET['id'];
     require_once("../adatbazis.php");
@@ -8,4 +14,4 @@ if (isset($_GET['id'])) {
                     LIMIT 1";
     $eredmeny   =   mysqli_query($dbconn, $sql);
 }
-header("Location: szerkesztes.php");
+header("Location: tartalom-szerkesztes.php");
